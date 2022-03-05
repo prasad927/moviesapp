@@ -289,3 +289,16 @@ header .nav-links li:last-child {
   font-size: 3rem;
   text-align: center;
 }
+
+/* movies info page*/
+
+.movieInfo{
+  margin-top: 6vh;
+  margin-left: 15vw;
+  width: 45vw;
+}
+
+.movieInfo img{
+  height:65vh;
+  width: 100%;
+}

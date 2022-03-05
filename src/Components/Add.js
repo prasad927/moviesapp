@@ -1,12 +1,14 @@
-import React,{useEffect, useState}from 'react';
+import React,{useEffect, useState,useContext}from 'react';
 import { MovieCard } from './MovieCard';
 import { GlobalProvider } from '../Context/GlobalState';
-
+import { GlobalState } from '../Context/GlobalState';
 export const Add = () => {
     const [searchedText,setSearchedText]=useState('');
-    const [recommended,setRecommended]= useState([]);
-    const [resultMovies,setMovies] = useState([]);
+    // const [recommended,setRecommended]= useState([]);
+    // const [resultMovies,setMovies] = useState([]);
+    const {recommended,setRecommended,resultMovies,setResultMovies} = useContext(GlobalState);
 
+    console.log(recommended);
     const handleChange =(e)=>{
         e.preventDefault();
         setSearchedText(e.target.value);
@@ -16,10 +18,10 @@ export const Add = () => {
             return res.json();
         }).then(data=>{
             if(!data.errors){
-               console.log(data.results);
-               setMovies(data.results);
+               setResultMovies(data.results);
+               setRecommended([]);
             }else{
-               setMovies([]);
+               setResultMovies([]);
             }
         }).catch(function(err){
             console.log(err);
@@ -36,6 +38,7 @@ export const Add = () => {
         }).then(data=>{
             const results = data.results.slice(0,10);
             setRecommended([...results]);
+            setResultMovies([]); //debug the line
         })
     },[])
 

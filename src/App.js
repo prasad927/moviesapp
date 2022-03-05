@@ -5,6 +5,7 @@ import { Navbar } from './Components/Navbar';
 import { WatchList } from './Components/WatchList';
 import { Watched } from './Components/Watched';
 import { GlobalProvider } from './Context/GlobalState';
+import MovieInfo from './Components/MovieInfo';
 
 function App() {
   return (
@@ -14,12 +15,12 @@ function App() {
         <Router>
           <Navbar />
           <Routes>
-            <Route exact path="/moviespp" element={<WatchList />}></Route>
+            <Route exact path="/" element={<WatchList />}></Route>
             <Route path="/watched" element={<Watched />}></Route>
             <Route path="/add" element={<Add />}></Route>
+            <Route path="/movieInfo/:id" element={<MovieInfo/>}></Route>
           </Routes>
         </Router>
-        
       </GlobalProvider>
     </>
   );

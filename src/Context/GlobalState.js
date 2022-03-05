@@ -1,9 +1,9 @@
 import React,{ createContext,useEffect,useState,useContext} from "react";
 
 //initial state
-const initialState={
+let initialState={
     watchList:localStorage.getItem('watchList') ? JSON.parse(localStorage.getItem('watchList')):[],
-    watched:localStorage.getItem('watched') ? JSON.parse(localStorage.getItem('watched')):[]
+    watched:localStorage.getItem('watched') ? JSON.parse(localStorage.getItem('watched')):[],
 }
 
 export const GlobalState = createContext(initialState); //creating context
@@ -11,7 +11,7 @@ export const GlobalState = createContext(initialState); //creating context
 
 //provider components.
 export const GlobalProvider = (props)=>{
-   
+
     const [state,setState] = useState(initialState);  //make as state
 
     const changeMoviesState = (msg,movie)=>{
@@ -20,7 +20,6 @@ export const GlobalProvider = (props)=>{
                 ...state,
                 watchList:[movie,...state.watchList]
             })
-
             return;
         }
 
@@ -53,8 +52,10 @@ export const GlobalProvider = (props)=>{
                  watched:state.watched.filter(cmovie=>cmovie.id!==movie.id)
              })
         }
-
-    } 
+    }
+    
+    const [recommended,setRecommended]= useState([]);
+    const [resultMovies,setResultMovies] = useState([]);
      
 
     useEffect(()=>{
@@ -67,7 +68,7 @@ export const GlobalProvider = (props)=>{
     console.log("HELLO FROM GLOBAL PROVIDER..");
     return(
 
-        <GlobalState.Provider value={{watchList:state.watchList,watched:state.watched,changeMoviesState}}>
+        <GlobalState.Provider value={{watchList:state.watchList,watched:state.watched,changeMoviesState,recommended,setRecommended,resultMovies,setResultMovies}}>
             {props.children}
         </GlobalState.Provider>
     )

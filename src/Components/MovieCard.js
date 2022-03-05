@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import { GlobalState } from '../Context/GlobalState';
 import { MovieControls } from './MovieControls';
+import {Link} from "react-router-dom";
 
 
 export const MovieCard = ({movie}) => {
@@ -23,10 +24,12 @@ export const MovieCard = ({movie}) => {
         </div>
 
         <div className="info">
+             <Link to={`/movieInfo/${movie.id}`} style={{textDecoration: 'none'}}>
              <div className="header">
                  <h3 className="title">{movie.title}</h3>
                  <h4 className='release-date'>{movie.release_date && movie.release_date.substring(0,4)||'####'}</h4>
              </div>
+             </Link>
 
              <div className='controls'>
                 <button className='btn' 
